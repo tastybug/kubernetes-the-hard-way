@@ -59,6 +59,8 @@ The binaries that will be downloaded are listed in the `downloads.txt` file, whi
 
 ```bash
 cat downloads.txt
+# or
+cat downloads-x86.txt
 ```
 
 Download the binaries listed in the `downloads.txt` file using the `wget` command:
