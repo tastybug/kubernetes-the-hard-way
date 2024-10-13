@@ -28,3 +28,53 @@ After running the `uname` command you should see the following output:
 You maybe surprised to see `aarch64` here, but that is the official name for the Arm Architecture 64-bit instruction set. You will often see `arm64` used by Apple, and the maintainers of the Linux kernel, when referring to support for `aarch64`. This tutorial will use `arm64` consistently throughout to avoid confusion.
 
 Next: [setting-up-the-jumpbox](02-jumpbox.md)
+
+## Addition: Vagrant Based Setup
+
+```
+mkdir k8s-vagrant
+vim Vagrantfile
+```
+
+Add this:
+
+```ruby
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+#Place Vagrantfile in the directory you run vagrant from.
+#This should also contain ubuntu.yml which configure VMs
+
+# setting for all VMs
+Vagrant.configure("2") do |config|
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2048
+    v.cpus = 1
+  end
+
+  config.vm.define "jumpbox" do |jumpbox|
+    jumpbox.vm.box = "debian/bookworm64"
+	jumpbox.vm.hostname = "jumpbox"
+	jumpbox.vm.network "private_network", ip: "192.168.60.5"
+  end
+
+  config.vm.define "server" do |server|
+    server.vm.box = "debian/bookworm64"
+    server.vm.hostname = "server"
+    server.vm.network "private_network", ip: "192.168.60.10"
+  end
+
+  config.vm.define "node0" do |node0|
+    node0.vm.box = "debian/bookworm64"
+    node0.vm.hostname = "node-0"
+    node0.vm.network "private_network", ip: "192.168.60.11"
+  end
+
+  config.vm.define "node1" do |node1|
+    node1.vm.box = "debian/bookworm64"
+    node1.vm.hostname = "node-1"
+    node1.vm.network "private_network", ip: "192.168.60.12"
+  end
+
+end
+```
