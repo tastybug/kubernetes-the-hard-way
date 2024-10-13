@@ -42,10 +42,6 @@ Add this:
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-#Place Vagrantfile in the directory you run vagrant from.
-#This should also contain ubuntu.yml which configure VMs
-
-# setting for all VMs
 Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
