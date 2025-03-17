@@ -12,6 +12,8 @@ When generating kubeconfig files for Kubelets the client certificate matching th
 
 > The following commands must be run in the same directory used to generate the SSL certificates during the [Generating TLS Certificates](04-certificate-authority.md) lab.
 
+> Philipp's note: here, `kubectl` is used to generate a kubeconfig file for the node's `kubelet` process. Since certificates have been embedded into the file, it becomes portable and can later be copied over to the nodes.
+
 Generate a kubeconfig file the node-0 worker node:
 
 ```bash
